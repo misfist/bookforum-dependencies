@@ -1,11 +1,11 @@
 ## Site Dependencies
 Use these files to install all necessary themes and plugins.
 
-### This repo contains 2 files:
-`composer.json`
-`.env.example`
+### Files Contained in Rep:
+1. `composer.json`
+2. `.env.example`
 
-## Steps
+## Steps to Install
 - Put the files (without repo folder) in the root of your website folder
 - Copy `.env.example` to a file called `.env`
 - Add license key to `ACF_PRO_KEY` property
