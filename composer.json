@@ -1,0 +1,110 @@
+{
+    "name": "bookforum/site",
+    "description": "WordPress themes and plugins.",
+    "type": "project",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Pea",
+            "email": "pea@misfist.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
+        },
+        {
+            "type": "package",
+            "package": {
+              "name": "advanced-custom-fields/advanced-custom-fields-pro",
+              "version": "6.2.1.1",
+              "type": "wordpress-plugin",
+              "dist": {
+                "type": "zip",
+                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%ACF_PRO_KEY}&t={%VERSION}"
+              },
+            "require": {
+                "ffraenz/private-composer-installer": "^5.0",
+                "composer/installers": "^1.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "misfist/site-functionality-bookforum",
+                "version": "dev-main",
+                "type": "wordpress-plugin",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/misfist/site-functionality-bookforum/archive/refs/heads/main.zip"
+                },
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:misfist/site-functionality-bookforum.git",
+                    "reference": "main"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "misfist/blank-theme",
+                "version": "dev-main",
+                "type": "wordpress-theme",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/misfist/blank-theme/archive/refs/heads/main.zip"
+                },
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:misfist/blank-theme.git",
+                    "reference": "main"
+                }
+            }
+        }
+    ],
+    "require": {
+        "misfist/site-functionality-bookforum": "dev-main",
+        "misfist/blank-theme": "dev-main",
+        "wpackagist-plugin/codepress-admin-columns":"^4.6.1",
+        "advanced-custom-fields/advanced-custom-fields-pro": "^6.2.1.1",
+        "wpackagist-plugin/block-visibility":"^3.0.4",
+        "wpackagist-plugin/wp-user-avatars": "^1.4.1",
+        "wpackagist-plugin/wp-rest-api-v2-menus":"^0.12.1",
+        "wpackagist-plugin/wp-webhooks":"^3.3.1",
+        "wpackagist-plugin/headless-mode":"^0.4.0",
+        "wpackagist-plugin/edit-flow":"^0.9.7",
+        "wpackagist-plugin/co-authors-plus":"^3.5.15",
+        "vlucas/phpdotenv": "^5.4.0"
+    },
+    "require-dev": {
+        "wpackagist-plugin/user-switching":"^1.7.0",
+        "wpackagist-plugin/debug-bar":"^1.1.4",
+        "wpackagist-plugin/query-monitor":"^3.13.1"
+    },
+    "extra": {
+        "installer-paths": {
+            "wp-content/plugins/site-functionality/": ["misfist/site-functionality-bookforum"],
+            "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "wp-content/themes/{$name}/": ["type:wordpress-theme"]
+        },
+        "private-composer-installer": {
+            "dotenv-path": ".",
+            "dotenv-name": ".env"
+          }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "ffraenz/private-composer-installer": true
+        },
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
+}
