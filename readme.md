@@ -1,6 +1,10 @@
 ## Site Dependencies
 Use these files to install all necessary themes and plugins.
 
+### Requirements
+- WordPress must be installed
+- [Composer](https://getcomposer.org/) must be installed
+
 ### Files Contained in Rep:
 1. `composer.json`
 2. `.env.example`
