@@ -19,6 +19,10 @@
             ]
         },
         {
+            "type":"composer",
+            "url":"https://composer.deliciousbrains.com"
+        },
+        {
             "type": "package",
             "package": {
               "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -81,6 +85,7 @@
         "wpackagist-plugin/headless-mode":"^0.4.0",
         "wpackagist-plugin/edit-flow":"^0.9.7",
         "wpackagist-plugin/co-authors-plus":"^3.5.15",
+        "deliciousbrains-plugin/wp-migrate-db-pro": "*",
         "vlucas/phpdotenv": "^5.4.0"
     },
     "require-dev": {
