@@ -12,10 +12,8 @@ RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 RUN composer self-update
 
-# Setup for ssh onto github
+# Setup for ssh
 RUN mkdir -p /root/.ssh
-COPY ./id_ed25519 /root/.ssh/id_ed25519
-RUN chmod 700 /root/.ssh/id_ed25519
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 ARG COMPOSER_API_USERNAME
@@ -24,9 +22,7 @@ ARG COMPOSER_API_PASSWORD
 WORKDIR /var/www/html
 COPY auth.json.example .
 RUN cat auth.json.example | envsubst > auth.json
-# RUN printf "[profile jacobin]\n aws_access_key_id = $AWS_ACCESS_KEY_ID\n aws_secret_access_key = $AWS_SECRET_ACCESS_KEY\n" > $HOME/.aws/config
-# sed -e "s/COMPOSER_API_USERNAME/`git rev-parse HEAD`/g" deploy/Dockerrun.aws.json.template > deploy/Dockerrun.aws.json
 COPY composer.json .
 COPY composer.lock .
 
-RUN composer install
+# RUN composer install
