@@ -48,7 +48,7 @@ Install PHP dependencies with `docker compose exec wordpress /bin/bash -c "compo
 
 Extract WordPress backup data to `bookforum-dependencies/wp-data`. (This directory is git-ignored.) The Docker image will look for uploads data in `wp-data/files/wp-content/uploads`.
 
-Import database with `mysql -h 127.0.0.1 -P 3306 -u root -p wordpress < bookforum-dependencies/wp-data/{FILENAMEHERE}.sql`
+Import database with `docker compose run -rm wpcli db import bookforum-dependencies/wp-data/{FILENAMEHERE}.sql`
 
 Create an admin user with `
 `docker compose run --rm wpcli user create yourname yourname@positiondev.com --role=administrator`.
