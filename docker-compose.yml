@@ -1,0 +1,70 @@
+version: '3.9'
+
+services:
+  legacy_db:
+    image: mysql:8
+    volumes:
+      - legacy_db_data:/var/lib/mysql
+    ports:
+      - "3305:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: bookforum
+      MYSQL_USER: legacy_user
+      MYSQL_PASSWORD: legacy_pass
+
+  wordpress_db:
+    image: mysql:8
+    volumes:
+      - wp_db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppass
+
+  wordpress:
+    depends_on:
+      - wordpress_db
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - wp_file_data:/var/www/html
+      - ./bookforum-dependencies/wp-data/files/wp-content/uploads:/var/www/html/wp-content/uploads
+    build:
+      context: ./bookforum-dependencies
+      args: 
+        COMPOSER_API_USERNAME: ${COMPOSER_API_USERNAME}
+        COMPOSER_API_PASSWORD: ${COMPOSER_API_PASSWORD}
+    ports:
+      - "8080:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: wordpress_db
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wordpress
+      ACF_PRO_KEY: ${ACF_PRO_KEY}
+
+  wpcli:
+    image: wordpress:cli-2.8.1-php8.2
+    depends_on:
+      - wordpress
+    volumes_from:
+      - wordpress
+    entrypoint: wp  
+    command: "--info"
+    environment:
+      WORDPRESS_DB_HOST: wordpress_db
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wordpress
+      ACF_PRO_KEY: ${ACF_PRO_KEY}
+
+volumes:
+  legacy_db_data:
+  wp_db_data:
+  wp_file_data:
