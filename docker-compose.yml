@@ -31,7 +31,7 @@ services:
     depends_on:
       - wordpress_db
     volumes:
-      - ~/.ssh:/root/.ssh
+      - ~/.ssh/${GITHUB_PRIVATE_KEY}:/root/.ssh/${GITHUB_PRIVATE_KEY}
       - wp_file_data:/var/www/html
       - ./bookforum-dependencies/wp-data/files/wp-content/uploads:/var/www/html/wp-content/uploads
     build:

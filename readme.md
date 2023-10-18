@@ -41,6 +41,7 @@ Add this repository as a submodule of your project.
 In your project's root directory, create a symbolic link to the docker-compose.yml file: `ln -s bookforum-dependencies/docker-compose.yml docker-compose.yml`.
 
 Copy `.env.example` into the project's root directory as `.env` and set the variables.
+- GITHUB_PRIVATE_KEY var is just a file name of the private key you use for github eg GITHUB_PRIVATE_KEY=id_ed25519
 
 Run `docker compose up`.
 
@@ -48,7 +49,7 @@ Install PHP dependencies with `docker compose exec wordpress /bin/bash -c "compo
 
 Extract WordPress backup data to `bookforum-dependencies/wp-data`. (This directory is git-ignored.) The Docker image will look for uploads data in `wp-data/files/wp-content/uploads`.
 
-Import database with `docker compose run -rm wpcli db import bookforum-dependencies/wp-data/{FILENAMEHERE}.sql`
+Import database with `mysql -h 127.0.0.1 -P 3306 -u root -p wordpress < bookforum-dependencies/wp-data/bookforum-migrate-20230926191258.sql`
 
 Create an admin user with `
 `docker compose run --rm wpcli user create yourname yourname@positiondev.com --role=administrator`.
