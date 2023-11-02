@@ -21,6 +21,7 @@ services:
     ports:
       - "3306:3306"
     restart: always
+    command: --general-log=1 --general-log-file=/var/log/mysql/general.log
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_DATABASE: wordpress
@@ -36,7 +37,7 @@ services:
       - ./bookforum-dependencies/wp-data/files/wp-content/uploads:/var/www/html/wp-content/uploads
     build:
       context: ./bookforum-dependencies
-      args: 
+      args:
         COMPOSER_API_USERNAME: ${COMPOSER_API_USERNAME}
         COMPOSER_API_PASSWORD: ${COMPOSER_API_PASSWORD}
     ports:
@@ -55,7 +56,7 @@ services:
       - wordpress
     volumes_from:
       - wordpress
-    entrypoint: wp  
+    entrypoint: wp
     command: "--info"
     environment:
       WORDPRESS_DB_HOST: wordpress_db
