@@ -21,7 +21,7 @@ services:
     ports:
       - "3306:3306"
     restart: always
-    command: --general-log=1 --general-log-file=/var/log/mysql/general.log
+    command: --general-log=1 --general-log-file=/var/log/mysql/general.log --sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_DATABASE: wordpress
