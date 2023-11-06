@@ -76,6 +76,7 @@
     "require": {
         "misfist/site-functionality-bookforum": "dev-main",
         "misfist/blank-theme": "dev-main",
+        "wpackagist-plugin/amazon-s3-and-cloudfront":"^3.2.5",
         "wpackagist-plugin/codepress-admin-columns":"^4.6.1",
         "advanced-custom-fields/advanced-custom-fields-pro": "^6.2.1.1",
         "wpackagist-plugin/block-visibility":"^3.0.4",
